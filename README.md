@@ -52,7 +52,7 @@ python3 -m src.main
 
 Below is a demonstration of the project in action:
 
-![Slippery Maze Demo](https://github.com/dancher00/Slippery-Random-Maze/demo.gif)
+![Slippery Maze Demo](https://github.com/dancher00/Slippery-Random-Maze/blob/main/demo.gif)
 
 
 ## License
