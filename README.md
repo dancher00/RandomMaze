@@ -41,8 +41,7 @@ This project requires Python 3 and Pygame. Install Pygame using pip:
 pip install pygame
 ```
 
-
-3. **Usage:**
+## Usage
 
 Run the main script with:
 
@@ -50,11 +49,9 @@ Run the main script with:
 python3 -m src.main
 ```
 
-
-4. **Demo:**
+## Demo
 
 Below is a demonstration of the project in action:
 
-
-5. **License:**
+## License
 This project is licensed under the MIT License.
