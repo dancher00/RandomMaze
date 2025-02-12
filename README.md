@@ -5,7 +5,7 @@ A modular framework for experimenting with reinforcement learning algorithms by 
 # 1. Build and Run
 
 ```
-git clone https://github.com/dancher00/RandomMaze.git
+git clone https://github.com/dancher00/Slippery-Random-Maze
 cd 
 ```
 
