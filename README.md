@@ -37,9 +37,9 @@ The Slippery Random Maze project simulates a grid-based maze environment where a
 
 This project requires Python 3 and Pygame. Install Pygame using pip:
 
-```
-pip install pygame
-```
+   ```
+   pip install pygame
+   ```
 
 ## Usage
 
