@@ -27,10 +27,10 @@ The Slippery Random Maze project simulates a grid-based maze environment where a
 
 1. **Clone the repository:**
 
-   ```
-   git clone https://github.com/<username>/Slippery-Random-Maze.git
-   cd Slippery-Random-Maze
-   ```
+```
+git clone https://github.com/<username>/Slippery-Random-Maze.git
+cd Slippery-Random-Maze
+```
 
 2. **Install dependencies:**
 
