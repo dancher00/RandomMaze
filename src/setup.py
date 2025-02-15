@@ -16,7 +16,7 @@ requirements = '\n'.join(
 
 setup(
     # metadata
-    name='mylib',
+    name='random_maze',
     version="0.1",
     license='MIT',
     author='The Great Five',
