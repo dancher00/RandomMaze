@@ -7,7 +7,6 @@ def read(file_path):
         return f.read()
 
 
-readme = read('README.rst')
 # вычищаем локальные версии из файла requirements (согласно PEP440)
 requirements = '\n'.join(
     re.findall(r'^([^\s^+]+).*$',
@@ -23,7 +22,6 @@ setup(
     author='The Great Five',
     author_email="bair1209@gmail.com",
     description='Slippery Random Maze, python package',
-    long_description=readme,
     url='https://github.com/dancher00/Slippery-Random-Maze',
 
     # options
