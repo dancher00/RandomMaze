@@ -1,11 +1,11 @@
+import matplotlib.patches as patches
+import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 import seaborn as sns
-import matplotlib.patches as patches
-import numpy as np
-import matplotlib.pyplot as plt
 
-from visualizer import Visualizer
 from src.agent import MazeAgent
+from visualizer import Visualizer
 
 # Mapping actions to arrows
 ACTION_ARROWS = {

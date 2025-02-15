@@ -1,13 +1,12 @@
-from src.environment import MazeEnv
 from src.agent import MazeAgent
-from src.trainer import Trainer
-from src.visualizer import MazeVisualizer
 from src.config import (maze, start, goal, learning_rate,
                         start_epsilon, epsilon_decay,
                         final_epsilon, max_time,
                         discount_factor, n_episodes,
                         plot_path)
-from matplotlib import pyplot as plt
+from src.environment import MazeEnv
+from src.trainer import Trainer
+from src.visualizer import MazeVisualizer
 
 if __name__ == "__main__":
     environment = MazeEnv(maze, start, goal, max_time)

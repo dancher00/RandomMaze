@@ -1,9 +1,11 @@
-import gymnasium as gym
-import numpy as np
 from collections import defaultdict
 
-from src.environment import MazeEnv
+import gymnasium as gym
+import numpy as np
+
 from src.config import n_episodes
+from src.environment import MazeEnv
+
 
 class MazeAgent:
     def __init__(

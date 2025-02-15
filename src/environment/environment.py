@@ -1,7 +1,8 @@
 import gymnasium as gym
+import matplotlib.pyplot as plt
 import numpy as np
 from gymnasium import spaces
-import matplotlib.pyplot as plt
+
 
 class MazeEnv(gym.Env):
     def __init__(self, maze, start, goal, max_time=200):

@@ -1,6 +1,7 @@
-import gymnasium as gym
 from tqdm import tqdm
+
 from src.agent import MazeAgent
+
 
 class Trainer:
     def __init__(
