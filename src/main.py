@@ -1,34 +1,21 @@
-import pygame
-from src.environment import BasicMazeEnvironment
-from src.drawer import PygameDrawer
-from src.controller import BasicController
+from src.environment import MazeEnv
+from src.agent import MazeAgent
+from src.trainer import Trainer
+from src.visualizer import MazeVisualizer
+from src.config import (maze, start, goal, learning_rate,
+                        start_epsilon, epsilon_decay,
+                        final_epsilon, max_time,
+                        discount_factor, n_episodes,
+                        plot_path)
+from matplotlib import pyplot as plt
 
 if __name__ == "__main__":
-    grid_size = 10
-    cell_size = 40
-    max_steps = 100
-    framerate = 10
+    environment = MazeEnv(maze, start, goal, max_time)
+    agent = MazeAgent(environment, learning_rate, start_epsilon,
+                      epsilon_decay, final_epsilon, discount_factor)
 
-    environment = BasicMazeEnvironment(grid_size=grid_size, block_prob=0.2, max_steps=max_steps, seed=42)
-    observation = environment.reset()
-    
+    trainer = Trainer(agent, n_episodes)
+    trainer.train()
 
-    drawer = PygameDrawer(grid_size=grid_size, cell_size=cell_size, framerate=framerate)
-    controller = BasicController()
-
-    running = True
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-
-        action = controller.get_action(observation)
-        observation = environment.step(action)
-        print(f"Step: {observation.step_count}, Action: {action}, Reward: {observation.reward}, Score: {observation.score}")
-        drawer.draw(observation.map)
-
-        if observation.done:
-            print("Episode finished. Resetting environment.")
-            observation = environment.reset()
-
-    drawer.close()
+    visualizer = MazeVisualizer(agent)
+    visualizer.display_plots(plot_path)

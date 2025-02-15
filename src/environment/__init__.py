@@ -1,2 +1,1 @@
-from .environment import MazeEnvironment
-from .basic import BasicMazeEnvironment
+from .environment import MazeEnv
