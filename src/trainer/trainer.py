@@ -1,6 +1,6 @@
 from tqdm import tqdm
 
-from src.agent import MazeAgent
+from agent import MazeAgent
 
 
 class Trainer:

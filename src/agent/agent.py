@@ -3,8 +3,8 @@ from collections import defaultdict
 import gymnasium as gym
 import numpy as np
 
-from src.config import n_episodes
-from src.environment import MazeEnv
+from config import n_episodes
+from environment import MazeEnv
 
 
 class MazeAgent:
