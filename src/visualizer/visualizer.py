@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-from src.agent import MazeAgent
+from agent import MazeAgent
 
 
 class Visualizer:

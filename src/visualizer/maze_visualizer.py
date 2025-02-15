@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
-from src.agent import MazeAgent
+from agent import MazeAgent
 from visualizer import Visualizer
 
 # Mapping actions to arrows
