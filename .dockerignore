@@ -1,0 +1,6 @@
+.git
+__pycache__
+*.pyc
+.vscode
+img
+demo.gif

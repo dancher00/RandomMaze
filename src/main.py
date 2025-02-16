@@ -13,6 +13,8 @@ if __name__ == "__main__":
     agent = MazeAgent(environment, learning_rate, start_epsilon,
                       epsilon_decay, final_epsilon, discount_factor)
 
+    plot_path = "/app/img"
+
     trainer = Trainer(agent, n_episodes)
     trainer.train()
 

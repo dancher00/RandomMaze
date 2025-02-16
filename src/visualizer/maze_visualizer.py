@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+import os
 
 from agent import MazeAgent
 from visualizer import Visualizer
@@ -34,6 +35,7 @@ class MazeVisualizer(Visualizer):
         if plot_path is None:
             plt.show()
         else:
+            os.makedirs(plot_path, exist_ok=True) 
             plt.savefig(plot_path + "/results.png")
 
     def extract_q_policy(self):

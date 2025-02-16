@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 from agent import MazeAgent
 
@@ -15,10 +16,12 @@ class Visualizer:
         _, ax = plt.subplots(1, 3, figsize=(20, 8))
         self.plot_training(ax)
         plt.tight_layout()
+
         if plot_path is None:
             plt.show()
         else:
-            plt.savefig(plot_path + "/training.png")
+            os.makedirs(plot_path, exist_ok=True)  
+            plt.savefig(os.path.join(plot_path, "training.png"))
 
     def plot_training(self, ax: plt.Axes):
         ax[0].plot(np.convolve(self.wrapped_env.return_queue, np.ones(100)))
