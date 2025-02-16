@@ -25,27 +25,24 @@ The Slippery Random Maze project simulates a grid-based maze environment where a
 
 ## Installation
 
-1. **Clone the repository:**
+**Clone the repository:**
 
 ```
 git clone https://github.com/<username>/Slippery-Random-Maze.git
 cd Slippery-Random-Maze
 ```
 
-2. **Install dependencies:**
-
-This project requires Python 3 and Pygame. Install Pygame using pip:
-
-   ```
-   pip install pygame
-   ```
 
 ## Usage
 
-Run the main script with:
+Use docker
 
 ```
-python3 -m src.main
+docker build --no-cache -t randommaze .
+
+
+
+docker run --rm -v $(pwd)/img:/app/img randommaze
 ```
 
 ## Demo
