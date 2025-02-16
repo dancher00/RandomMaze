@@ -49,7 +49,7 @@ docker run --rm -v $(pwd)/img:/app/img randommaze
 
 Below is a demonstration of the project in action:
 
-![Slippery Maze Demo](https://github.com/dancher00/Slippery-Random-Maze/blob/main/demo.gif)
+![Slippery Maze Demo](https://github.com/dancher00/Slippery-Random-Maze/blob/main/maze_animation.gif)
 
 
 ## License

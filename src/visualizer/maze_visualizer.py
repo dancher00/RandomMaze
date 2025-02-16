@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import os
+from matplotlib.colors import ListedColormap
 
 from agent import MazeAgent
 from visualizer import Visualizer
@@ -61,6 +62,10 @@ class MazeVisualizer(Visualizer):
     def plot_results(self, ax: plt.Axes):
         """Plots the final maze state and overlays Q-values with learned policy on one heatmap."""
         # Create Final State visualization
+
+        custom_colors = ["#217074", "#E7EAEF", "#EDC5AB"]
+        cmap = ListedColormap(custom_colors)
+
         display_maze = self.env.maze.copy().astype(float)
         display_maze[self.env.maze == 1] = -100  # Walls
         display_maze[self.env.state] = 100       # Agent position
@@ -70,7 +75,7 @@ class MazeVisualizer(Visualizer):
         agent_x, agent_y = self.env.state
         triangle = patches.RegularPolygon((agent_y, agent_x), numVertices=3, radius=0.3, color='red')
 
-        ax[0].imshow(display_maze)
+        ax[0].imshow(display_maze, cmap=cmap)
         ax[0].add_patch(triangle) #agent
         ax[0].axis("off")
         ax[0].set_title("Last Frame")
