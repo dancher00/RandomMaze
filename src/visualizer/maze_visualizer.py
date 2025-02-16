@@ -5,7 +5,7 @@ import pandas as pd
 import seaborn as sns
 import os
 
-from agent import MazeAgent
+from agent import MazeAgent, ValueIterationAgent
 from visualizer import Visualizer
 
 # Mapping actions to arrows
@@ -98,5 +98,88 @@ class MazeVisualizer(Visualizer):
 
 
         ax[1].set_title("Learned Q-values & Policy")
+        return ax
+
+
+class ValueIterationVisualizer():
+    def __init__(
+            self,
+            agent: ValueIterationAgent):
+        self.agent = agent
+        self.env = agent.env
+        self.df_state_values = None
+        self.df_policy = None
+        self.extract_policy()
+
+    def display_plots(self, plot_path=None):
+        _, ax = plt.subplots(1, 2, figsize=(16, 8))
+        self.plot_results(ax)
+        plt.tight_layout()
+        if plot_path is None:
+            plt.show()
+        else:
+            os.makedirs(plot_path, exist_ok=True) 
+            plt.savefig(plot_path + "/results.png")
+
+    def extract_policy(self):
+        """Extracts the best action and State Values from table for each state."""
+        policy_data = []
+        values_data = []
+        for x in range(self.env.n):
+            for y in range(self.env.m):
+                state = (x, y)
+                if self.agent.env.maze[x, y] == 1:
+                    best_action = "#"  # Wall
+                    value = None
+                else:
+                    best_action_idx = self.agent.get_action(state)
+                    best_action = ACTION_ARROWS[best_action_idx]
+                    value = self.agent.value_function[state]
+                policy_data.append([x, y, best_action])
+                values_data.append([x, y, value])
+
+        self.df_policy = pd.DataFrame(policy_data, columns=["X", "Y", "Action"])
+        self.df_state_values = pd.DataFrame(values_data, columns=["X", "Y", "Value"])
+
+    def plot_results(self, ax: plt.Axes):
+        """Plots the initial maze state and overlays State Values with learned policy on one heatmap."""
+        # Create Final State visualization
+        display_maze = self.env.maze.copy().astype(float)
+        display_maze[self.env.maze == 1] = -100  # Walls
+        display_maze[self.env.state] = 100       # Agent position
+        display_maze[self.env.goal] = 200        # Goal position
+
+        # Draw agent as a triangle
+        agent_x, agent_y = self.env.state
+        triangle = patches.RegularPolygon((agent_y, agent_x), numVertices=3, radius=0.3, color='red')
+
+        ax[0].imshow(display_maze)
+        ax[0].add_patch(triangle) #agent
+        ax[0].axis("off")
+        ax[0].set_title("Initial State")
+
+        df_q_values_pivot = self.df_state_values.pivot(index="X", columns="Y", values="Value")
+
+        # Draw Q-values as heatmap
+        sns.heatmap(df_q_values_pivot, cmap="Greens", annot=False, linewidths=0.5, linecolor='black', ax=ax[1], cbar=True)
+
+        # Overlay walls, goal, and arrows
+        for x in range(self.env.n):
+            for y in range(self.env.m):
+                if self.env.maze[x, y] == 1:
+                    rect = patches.Rectangle((y, x), 1, 1, facecolor='black', edgecolor='black')
+                    ax[1].add_patch(rect)
+                elif (x, y) == self.env.goal:
+                    rect = patches.Rectangle((y, x), 1, 1, facecolor='gold', edgecolor='black')
+                    ax[1].add_patch(rect)
+
+        # Draw policy arrows
+        for _, row in self.df_policy.iterrows():
+            x, y, action = row
+            if action != "#":  # Ignore walls
+                ax[1].text(y + 0.5, x + 0.5, action, ha='center', va='center', fontsize=16, color='red')
+
+
+        ax[1].set_title("Learned State Values & Policy")
         return ax
 

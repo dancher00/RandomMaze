@@ -1,1 +1,1 @@
-from .agent import MazeAgent
+from .agent import MazeAgent, ValueIterationAgent
