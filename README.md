@@ -36,6 +36,24 @@ $$
 P((x_i + 1, y_i)\mid(x_i, y_i), \text{``Up''}) = 0.05
 $$
 
+In case only "Down" and "Up" are valid moves:
+
+$$
+P((x_i, y_i + 1)\mid(x_i, y_i), \text{``Left''}) = 0.5
+$$
+
+$$
+P((x_i - 1, y_i)\mid(x_i, y_i), \text{``Left''}) = 0
+$$
+
+$$
+P((x_i, y_i - 1)\mid(x_i, y_i), \text{``Left''}) = 0.5
+$$
+
+$$
+P((x_i + 1, y_i)\mid(x_i, y_i), \text{``Left''}) = 0
+$$
+
 Python code for state transition:
 ```python
 intended_move = self.transitions[action]
