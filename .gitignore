@@ -25,3 +25,4 @@ Dockerfile
 .vscode/
 .idea/
 *.iml
+/.venv/

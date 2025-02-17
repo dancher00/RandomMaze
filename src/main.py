@@ -1,12 +1,13 @@
 # В src/main.py
-from agent import MazeAgent, ValueIterationAgent, PolicyIterationAgent
+from agent import QLearningAgent, ValueIterationAgent, PolicyIterationAgent
 from config import (maze, start, goal, learning_rate,
                     start_epsilon, epsilon_decay,
                     final_epsilon, max_time,
                     discount_factor, n_episodes, plot_path)
 from environment import MazeEnv
-from trainer import Trainer, ValueIterationTrainer, PolicyIterationTrainer
-from visualizer import MazeVisualizer, ValueIterationVisualizer, PolicyIterationVisualizer
+from trainer import QLearningTrainer, ValueIterationTrainer, PolicyIterationTrainer
+from visualizer import QLearningVisualizer, ValueIterationVisualizer, PolicyIterationVisualizer
+from visualizer.agent_animation import AgentAnimationVisualizer
 import argparse
 import os
 
@@ -19,39 +20,26 @@ if __name__ == "__main__":
                         help="method's name...")
     args = parser.parse_args()
 
-    if args.method == 'q_learning':
-        agent = MazeAgent(environment, learning_rate, start_epsilon,
-                          epsilon_decay, final_epsilon, discount_factor)
-        results_folder = "/app/results/q-learning"
-        trainer = Trainer(agent, n_episodes)
-        trainer.train()
-        from visualizer.maze_visualizer import MazeVisualizer
-        visualizer = MazeVisualizer(agent)
-        visualizer.display_plots(results_folder)
-        from visualizer.agent_animation import AgentAnimationVisualizer
-        anim = AgentAnimationVisualizer(agent)
-        anim.create_gif(os.path.join(results_folder, "animation.gif"))
-    
-    elif args.method == 'value_iteration':
+    if args.method == 'value_iteration':
         agent = ValueIterationAgent(environment, discount_factor=discount_factor)
-        results_folder = "/app/results/value-iteration"
-        trainer = ValueIterationTrainer(agent, 100)
+        results_folder = "../results/value-iteration"
+        trainer = ValueIterationTrainer(agent, n_episodes)
         trainer.train()
-        from visualizer.maze_visualizer import ValueIterationVisualizer
         visualizer = ValueIterationVisualizer(agent)
-        visualizer.display_plots(results_folder)
-        from visualizer.agent_animation import AgentAnimationVisualizer
-        anim = AgentAnimationVisualizer(agent)
-        anim.create_gif(os.path.join(results_folder, "animation.gif"))
-
     elif args.method == 'policy_iteration':
         agent = PolicyIterationAgent(environment, discount_factor=discount_factor, theta=1e-2)
-        results_folder = "/app/results/policy-iteration"
-        trainer = PolicyIterationTrainer(agent)
+        results_folder = "../results/policy-iteration"
+        trainer = PolicyIterationTrainer(agent, n_episodes)
         trainer.train()
-        from visualizer.maze_visualizer import PolicyIterationVisualizer
         visualizer = PolicyIterationVisualizer(agent)
-        visualizer.display_plots(results_folder)
-        from visualizer.agent_animation import AgentAnimationVisualizer
-        anim = AgentAnimationVisualizer(agent)
-        anim.create_gif(os.path.join(results_folder, "animation.gif"))
+    else:
+        agent = QLearningAgent(environment, learning_rate, start_epsilon,
+                               epsilon_decay, final_epsilon, discount_factor)
+        results_folder = "../results/q-learning"
+        trainer = QLearningTrainer(agent, n_episodes)
+        trainer.train()
+        visualizer = QLearningVisualizer(agent)
+
+    visualizer.display_plots(results_folder)
+    anim = AgentAnimationVisualizer(agent)
+    anim.create_gif(os.path.join(results_folder, "animation.gif"))
