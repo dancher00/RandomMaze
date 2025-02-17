@@ -37,6 +37,17 @@ reward = 0 if self.state == self.goal else -1
 
 Three reinforcement learning algorithms are implemented in this environment: value iteration, policy iteration and q-learning. For first two approaches state transition function is used to calculate the probability of next state, for q-learning method next state is sampled from distribution described above.
 
+Q-function update:
+
+$$
+Q(s,a) \leftarrow Q(s,a) + \alpha \left[ r + \gamma \max_{a'} Q(s',a') - Q(s,a) \right]
+$$
+
+State value function update:
+
+$$
+V(s) = \sum_{s'} P(s' \mid s, \pi(s)) \left[ r(s, \pi(s), s') + \gamma V(s') \right]
+$$
 
 ## Installation and Usage
 
