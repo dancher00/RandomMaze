@@ -123,23 +123,20 @@ docker build --no-cache -t randommaze .
 Use `src/config.py` to modify parameters of the training process.
 ## Results
 
-Policy Iteration Training
-![PI_train](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/policy-iteration/training.png)
+Q-Learning Training
+![Q_train](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/q-learning/training.png)
+Q-Learning Results
+![Q_results](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/q-learning/results.png)
 
 Value Iteration Training
 ![VI_train](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/value-iteration/training.png)
-
-Q-Learning Training
-![Q_train](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/q-learning/training.png)
-
-Policy Iteration Results
-![PI_results](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/policy-iteration/results.png)
-
 Value Iteration Results
 ![VI_results](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/value-iteration/results.png)
 
-Q-Learning Results
-![Q_results](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/q-learning/results.png)
+Policy Iteration Training
+![PI_train](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/policy-iteration/training.png)
+Policy Iteration Results
+![PI_results](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/policy-iteration/results.png)
 
 ## Demo
 Below is a demonstration of the project in action:
