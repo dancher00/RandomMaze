@@ -28,7 +28,7 @@ The Slippery Random Maze project simulates a grid-based maze environment where a
 **Clone the repository:**
 
 ```
-git clone https://github.com/<username>/Slippery-Random-Maze.git
+git clone https://github.com/dancher00/Slippery-Random-Maze.git
 cd Slippery-Random-Maze
 ```
 
