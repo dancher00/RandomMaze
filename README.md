@@ -19,7 +19,19 @@ This project is a minimal environment designed for experimenting with reinforcem
 
 ## Overview
 
+### Environment
+
 The Slippery Random Maze project simulates a grid-based maze environment where an agent attempts to navigate from a starting position to a goal while encountering stochastic dynamics. The agent can move up, down, left, right, or stay in place. The movement action succeeds with an 85% probability if the target cell is not blocked; otherwise, the remaining 15% is equally distributed among other available adjacent cells.
+
+The agent receives a -1 reward for any action if it does not reach the goal cell as a result. Also it does not receive a penalty for colliding with walls. When the goal is reached, the agent receives a reward of 0:
+
+```python
+reward = 0 if self.state == self.goal else -1
+```
+
+### Agents
+
+Three reinforcement learning algorithms are implemented in this environment: value iteration, policy iteration and q-learning. For first two approaches state transition function is used to calculate the probability of next state, for q-learning method next state is sampled from distribution described above.
 
 ## Features
 
@@ -46,6 +58,8 @@ docker build --no-cache -t randommaze .
 ./run.sh value_iteration
 ./run.sh policy_iteration
 ```
+
+Use `src/config.py` to modify parameters of the training process.
 ## Results
 
 ![PI_train](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/policy-iteration/training.png)
