@@ -23,6 +23,16 @@ This project is a minimal environment designed for experimenting with reinforcem
 
 The Slippery Random Maze project simulates a grid-based maze environment where an agent attempts to navigate from a starting position to a goal while encountering stochastic dynamics. The agent can move up, down, left, right, or stay in place. The movement action succeeds with an 85% probability if the target cell is not blocked; otherwise, the remaining 15% is equally distributed among other available adjacent cells.
 
+Python code for state space:
+
+```
+states = []
+for i in range(self.n):
+    for j in range(self.m):
+        if self.maze[i, j] == 0:
+            states.append((i,j))
+```
+
 The agent receives a -1 reward for any action if it does not reach the goal cell as a result. Also it does not receive a penalty for colliding with walls. When the goal is reached, the agent receives a reward of 0:
 
 ```python
