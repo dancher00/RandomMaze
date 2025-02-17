@@ -17,7 +17,7 @@ intended moves have an 85% chance of success and a 15% chance of moving to a ran
 
 The Slippery Random Maze project simulates a grid-based maze environment where an agent attempts to navigate from a starting position to a goal while encountering stochastic dynamics. The agent can move up, down, left, right, or stay in place. The movement action succeeds with an 85% probability if the target cell is not blocked; otherwise, the remaining 15% is equally distributed among other available adjacent cells.
 
-Python code for state space:
+Python code for state transition:
 
 ```
 intended_move = self.transitions[action]
