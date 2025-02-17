@@ -5,7 +5,7 @@ import pandas as pd
 import seaborn as sns
 import os
 
-from agent import MazeAgent, ValueIterationAgent, PolicyIterationAgent
+from agent import QLearningAgent, ValueIterationAgent, PolicyIterationAgent
 from visualizer import Visualizer
 
 # Mapping actions to arrows
@@ -14,13 +14,14 @@ ACTION_ARROWS = {
     1: "↓",  # Down
     2: "←",  # Left
     3: "→",  # Right
-    4: "•"   # Stay
+    4: "•"  # Stay
 }
 
-class MazeVisualizer(Visualizer):
+
+class QLearningVisualizer(Visualizer):
     def __init__(
             self,
-            agent: MazeAgent):
+            agent: QLearningAgent):
         super().__init__(agent)
         self.env = agent.env.unwrapped
         self.df_q_values = None
@@ -35,7 +36,7 @@ class MazeVisualizer(Visualizer):
         if plot_path is None:
             plt.show()
         else:
-            os.makedirs(plot_path, exist_ok=True) 
+            os.makedirs(plot_path, exist_ok=True)
             plt.savefig(plot_path + "/results.png")
 
     def extract_q_policy(self):
@@ -63,22 +64,23 @@ class MazeVisualizer(Visualizer):
         # Create Final State visualization
         display_maze = self.env.maze.copy().astype(float)
         display_maze[self.env.maze == 1] = -100  # Walls
-        display_maze[self.env.state] = 100       # Agent position
-        display_maze[self.env.goal] = 200        # Goal position
+        display_maze[self.env.state] = 100  # Agent position
+        display_maze[self.env.goal] = 200  # Goal position
 
         # Draw agent as a triangle
         agent_x, agent_y = self.env.state
         triangle = patches.RegularPolygon((agent_y, agent_x), numVertices=3, radius=0.3, color='red')
 
         ax[0].imshow(display_maze)
-        ax[0].add_patch(triangle) #agent
+        ax[0].add_patch(triangle)  #agent
         ax[0].axis("off")
         ax[0].set_title("Last Frame")
 
         df_q_values_pivot = self.df_q_values.pivot(index="X", columns="Y", values="Q_Value")
 
         # Draw Q-values as heatmap
-        sns.heatmap(df_q_values_pivot, cmap="Greens", annot=False, linewidths=0.5, linecolor='black', ax=ax[1], cbar=True)
+        sns.heatmap(df_q_values_pivot, cmap="Greens", annot=False, linewidths=0.5, linecolor='black', ax=ax[1],
+                    cbar=True)
 
         # Overlay walls, goal, and arrows
         for x in range(self.env.n):
@@ -96,13 +98,13 @@ class MazeVisualizer(Visualizer):
             if action != "#":  # Ignore walls
                 ax[1].text(y + 0.5, x + 0.5, action, ha='center', va='center', fontsize=16, color='red')
 
-
         ax[1].set_title("Learned Q-values & Policy")
         return ax
 
 
-class ValueIterationVisualizer():
+class ValueIterationVisualizer(Visualizer):
     def __init__(self, agent: ValueIterationAgent):
+        super().__init__(agent)
         self.agent = agent
         self.env = agent.env
         self.df_state_values = None
@@ -148,8 +150,8 @@ class ValueIterationVisualizer():
         env = self.env.unwrapped if hasattr(self.env, 'unwrapped') else self.env
         display_maze = env.maze.copy().astype(float)
         display_maze[env.maze == 1] = -100  # walls
-        display_maze[env.state] = 100       # agent's position
-        display_maze[env.goal] = 200        # goal
+        display_maze[env.state] = 100  # agent's position
+        display_maze[env.goal] = 200  # goal
 
         agent_x, agent_y = env.state
         triangle = patches.RegularPolygon((agent_y, agent_x), numVertices=3, radius=0.3, color='red')
@@ -218,9 +220,9 @@ class PolicyIterationVisualizer:
     def plot_results(self, ax: plt.Axes):
         env = self.env.unwrapped if hasattr(self.env, 'unwrapped') else self.env
         display_maze = env.maze.copy().astype(float)
-        display_maze[env.maze == 1] = -100  
-        display_maze[env.state] = 100       
-        display_maze[env.goal] = 200        
+        display_maze[env.maze == 1] = -100
+        display_maze[env.state] = 100
+        display_maze[env.goal] = 200
 
         agent_x, agent_y = env.state
         triangle = patches.RegularPolygon((agent_y, agent_x), numVertices=3, radius=0.3, color='red')

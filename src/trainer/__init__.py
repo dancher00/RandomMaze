@@ -1,1 +1,2 @@
-from .trainer import Trainer, ValueIterationTrainer, PolicyIterationTrainer
+from .trainer import Trainer
+from .maze_trainer import QLearningTrainer, ValueIterationTrainer, PolicyIterationTrainer
