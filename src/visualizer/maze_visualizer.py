@@ -127,7 +127,6 @@ class ValueIterationVisualizer():
             plt.savefig(os.path.join(plot_path, "training.png"))
 
     def extract_policy(self):
-        """Извлекает оптимальное действие и значения состояний для каждого состояния."""
         policy_data = []
         values_data = []
         for x in range(self.env.n):
@@ -146,14 +145,12 @@ class ValueIterationVisualizer():
         self.df_state_values = pd.DataFrame(values_data, columns=["X", "Y", "Value"])
 
     def plot_results(self, ax: plt.Axes):
-        # Используем оригинальное окружение (без обёртки)
         env = self.env.unwrapped if hasattr(self.env, 'unwrapped') else self.env
         display_maze = env.maze.copy().astype(float)
-        display_maze[env.maze == 1] = -100  # Стены
-        display_maze[env.state] = 100       # Позиция агента
-        display_maze[env.goal] = 200        # Цель
+        display_maze[env.maze == 1] = -100  # walls
+        display_maze[env.state] = 100       # agent's position
+        display_maze[env.goal] = 200        # goal
 
-        # Рисуем агента как треугольник
         agent_x, agent_y = env.state
         triangle = patches.RegularPolygon((agent_y, agent_x), numVertices=3, radius=0.3, color='red')
 
@@ -162,7 +159,6 @@ class ValueIterationVisualizer():
         ax.axis("off")
         ax.set_title("Final State")
 
-        # Наложение стен, цели и стрелок политики
         for x in range(env.n):
             for y in range(env.m):
                 if env.maze[x, y] == 1:
@@ -188,7 +184,6 @@ class PolicyIterationVisualizer:
 
     def display_plots(self, plot_path=None):
         fig, ax = plt.subplots(figsize=(16, 8))
-        # Левый subplot: график изменений политики
         if hasattr(self.agent, 'policy_changes') and self.agent.policy_changes:
             ax.plot(self.agent.policy_changes, marker='o')
             ax.set_title("Policy Changes per Iteration")
@@ -204,7 +199,6 @@ class PolicyIterationVisualizer:
             plt.savefig(os.path.join(plot_path, "training.png"))
 
     def extract_policy(self):
-        """Извлекает оптимальное действие и значения состояний для каждого состояния."""
         policy_data = []
         values_data = []
         for x in range(self.env.n):
@@ -224,11 +218,10 @@ class PolicyIterationVisualizer:
     def plot_results(self, ax: plt.Axes):
         env = self.env.unwrapped if hasattr(self.env, 'unwrapped') else self.env
         display_maze = env.maze.copy().astype(float)
-        display_maze[env.maze == 1] = -100  # Стены
-        display_maze[env.state] = 100       # Позиция агента
-        display_maze[env.goal] = 200        # Цель
+        display_maze[env.maze == 1] = -100  
+        display_maze[env.state] = 100       
+        display_maze[env.goal] = 200        
 
-        # Рисуем агента как треугольник
         agent_x, agent_y = env.state
         triangle = patches.RegularPolygon((agent_y, agent_x), numVertices=3, radius=0.3, color='red')
 
@@ -237,7 +230,6 @@ class PolicyIterationVisualizer:
         ax.axis("off")
         ax.set_title("Final State")
 
-        # Наложение стен, цели и стрелок политики
         for x in range(env.n):
             for y in range(env.m):
                 if env.maze[x, y] == 1:

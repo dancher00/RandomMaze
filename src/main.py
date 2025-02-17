@@ -13,13 +13,12 @@ import os
 if __name__ == "__main__":
     environment = MazeEnv(maze, start, goal, max_time)
 
-    parser = argparse.ArgumentParser(description='Выбор алгоритма обучения.')
+    parser = argparse.ArgumentParser(description='Algorithm Choosing...')
     parser.add_argument('--method', type=str, default="q_learning",
                         choices=['q_learning', 'value_iteration', 'policy_iteration'],
-                        help='Название метода.')
+                        help="method's name...")
     args = parser.parse_args()
 
-    # Определяем папку для сохранения результатов в зависимости от выбранного метода
     if args.method == 'q_learning':
         agent = MazeAgent(environment, learning_rate, start_epsilon,
                           epsilon_decay, final_epsilon, discount_factor)

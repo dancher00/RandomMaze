@@ -1,2 +1,27 @@
-/.venv/
-/.idea/
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Логи и временные файлы
+*.log
+*.tmp
+*.swp
+.DS_Store
+
+# Артефакты, результаты обучения, картинки
+demo.gif
+img/
+results/
+
+# Виртуальное окружение
+venv/
+.env
+
+# Docker (если не нужен в репо)
+Dockerfile
+
+# IDE-шные файлы
+.vscode/
+.idea/
+*.iml

@@ -118,7 +118,6 @@ class PolicyIterationAgent:
         self.discount_factor = discount_factor
         self.theta = theta
         
-        # Инициализируем случайную политику и значения состояний для всех свободных ячеек лабиринта
         self.policy = {}
         self.state_values = {}
         for state in env.state_space:
@@ -127,14 +126,12 @@ class PolicyIterationAgent:
         self.policy_changes = []
 
     def policy_evaluation(self):
-        """Вычисляет значения состояний для текущей политики до сходимости."""
         while True:
             delta = 0
             for state in self.env.state_space:
                 v = self.state_values[state]
                 new_v = 0
                 action = self.policy[state]
-                # Для выбранного действия рассматриваем все возможные переходы
                 for transition in self.env.transition_function(state, action):
                     prob, next_state, reward, done = transition
                     new_v += prob * (reward + self.discount_factor * self.state_values.get(next_state, 0))
@@ -175,11 +172,9 @@ class PolicyIterationAgent:
         return iterations
 
     def get_action(self, state: tuple[int, int, bool] | tuple[int, int]):
-        """Возвращает действие согласно текущей политике для заданного состояния."""
         return self.policy.get(state, self.env.action_space.sample())
 
     def simulate_episode(self):
-        """Проходит эпизод по лабиринту, используя текущую политику, и возвращает последовательность состояний."""
         states = []
         state, _ = self.env.reset()
         states.append(state)

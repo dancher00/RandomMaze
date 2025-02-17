@@ -11,7 +11,6 @@ class AgentAnimationVisualizer:
         self.env = agent.env
 
     def simulate_episode(self):
-        """Проходит эпизод по лабиринту, возвращая последовательность состояний."""
         states = []
         state, _ = self.env.reset()
         states.append(state)
@@ -25,7 +24,6 @@ class AgentAnimationVisualizer:
         return states
 
     def draw_maze(self, ax, agent_state):
-        # Получаем оригинальное окружение
         env = self.env.unwrapped if hasattr(self.env, 'unwrapped') else self.env
         maze = env.maze.copy().astype(float)
         for x in range(env.n):
@@ -34,10 +32,8 @@ class AgentAnimationVisualizer:
                     ax.add_patch(patches.Rectangle((y, x), 1, 1, facecolor='black'))
                 else:
                     ax.add_patch(patches.Rectangle((y, x), 1, 1, facecolor='white', edgecolor='gray'))
-        # Отображаем цель
         goal_x, goal_y = env.goal
         ax.add_patch(patches.Rectangle((goal_y, goal_x), 1, 1, facecolor='gold'))
-        # Рисуем агента как красную окружность
         agent_x, agent_y = agent_state
         ax.add_patch(patches.Circle((agent_y + 0.5, agent_x + 0.5), 0.3, color='red'))
         ax.set_xlim(0, env.m)
@@ -46,18 +42,14 @@ class AgentAnimationVisualizer:
 
 
     def create_gif(self, gif_path="agent_animation.gif", interval=0.5):
-        """Создаёт GIF-анимацию прохождения лабиринта."""
         states = self.simulate_episode()
         images = []
         for state in states:
             fig, ax = plt.subplots(figsize=(5, 5))
             self.draw_maze(ax, state)
             fig.canvas.draw()
-        # Получаем ширину и высоту холста
             w, h = fig.canvas.get_width_height()
-        # Читаем буфер RGBA и преобразуем в numpy-массив
             image = np.frombuffer(fig.canvas.buffer_rgba(), dtype=np.uint8).reshape((h, w, 4))
-        # Отбрасываем альфа-канал, оставляя только RGB
             image = image[:, :, :3]
             images.append(image)
             plt.close(fig)

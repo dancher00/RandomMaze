@@ -66,4 +66,4 @@ class PolicyIterationTrainer:
 
     def train(self):
         iterations = self.agent.policy_iteration()
-        print(f"Policy Iteration сошлась за {iterations} итераций.")
+        print(f"Policy Iteration converged in {iterations} iterations")
