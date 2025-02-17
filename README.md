@@ -20,11 +20,21 @@ The Slippery Random Maze project simulates a grid-based maze environment where a
 Python code for state space:
 
 ```
-states = []
-for i in range(self.n):
-    for j in range(self.m):
-        if self.maze[i, j] == 0:
-            states.append((i,j))
+intended_move = self.transitions[action]
+next_state = (state[0] + intended_move[0], state[1] + intended_move[1])
+
+if not self._is_valid(next_state):
+    free_neighbors = self._get_free_neighbors(state)
+    if free_neighbors:
+        for free_state in free_neighbors:
+            reward = 0 if state == self.goal else -1
+            transitions.append([1 / len(free_neighbors), free_state, reward, False])
+        return transitions
+    else:
+        next_state = state
+        reward = 0 if next_state == self.goal else -1
+        transitions.append([1, next_state, reward, False])
+        return transitions
 ```
 
 The agent receives a -1 reward for any action if it does not reach the goal cell as a result. The agent can't hit walls by design. When the goal is reached, the agent receives a reward of 0:
