@@ -5,8 +5,7 @@
 
 Below is a demonstration of the project in action:
 
-![Slippery Maze Demo](https://github.com/dancher00/Slippery-Random-Maze/blob/main/demo.gif)
-
+![Slippery Maze Demo](https://github.com/dancher00/Slippery-Random-Maze/blob/main/demo_maze.gif)
 
 
 This project is a minimal environment designed for experimenting with reinforcement learning algorithms. The environment is a grid-based maze where the agent experiences "slippery" dynamics: intended moves have an 85% chance of success and a 15% chance of moving to a random adjacent unblocked cell.
