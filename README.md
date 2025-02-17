@@ -19,6 +19,7 @@ The Slippery Random Maze project simulates a grid-based maze environment where a
 
 Python code for state transition:
 
+Python
 ```
 intended_move = self.transitions[action]
 next_state = (state[0] + intended_move[0], state[1] + intended_move[1])
