@@ -19,6 +19,7 @@ The Slippery Random Maze project simulates a grid-based maze environment where a
 
 
 In case "Up" and other movements are valid moves:
+
 $$
 P((x_i, y_i + 1)\mid(x_i, y_i), \text{``Up''}) = 0.85
 $$
