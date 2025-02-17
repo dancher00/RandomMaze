@@ -12,11 +12,9 @@ This project is a minimal environment designed for experimenting with reinforcem
 
 ## Table of Contents
 - [Overview](#overview)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
 - [Demo](#demo)
+- [Features](#features)
+- [Installation and Usage](#installation-and-usage)
 - [License](#license)
 
 ## Overview
@@ -31,7 +29,7 @@ The Slippery Random Maze project simulates a grid-based maze environment where a
 - **Modular Design:** Components for environment, controller, drawer, and state.
 - **Extendable:** Easy to integrate with reinforcement learning algorithms.
 
-## Installation
+## Installation and Usage
 
 **Clone the repository:**
 
@@ -40,19 +38,13 @@ git clone https://github.com/dancher00/Slippery-Random-Maze.git
 cd Slippery-Random-Maze
 ```
 
-
-## Usage
-
 Use docker
-
 ```
 docker build --no-cache -t randommaze .
 
 ./run.sh q_learning
 ./run.sh value_iteration
 ./run.sh policy_iteration
-
-
 ```
 ## Results
 
@@ -61,8 +53,6 @@ docker build --no-cache -t randommaze .
 ![VI_train](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/value-iteration/training.png)
 
 ![Q_train](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/q-learning/training.png)
-
-
 
 
 ## License
