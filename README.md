@@ -1,11 +1,21 @@
 # Slippery Random Maze Reinforcement Learning Project
 
+
+## Demo
+
+Below is a demonstration of the project in action:
+
+![Slippery Maze Demo](https://github.com/dancher00/Slippery-Random-Maze/blob/main/demo_maze.gif)
+
+
 This project is a minimal environment designed for experimenting with reinforcement learning algorithms. The environment is a grid-based maze where the agent experiences "slippery" dynamics: intended moves have an 85% chance of success and a 15% chance of moving to a random adjacent unblocked cell.
 
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
-- [Installation and Usage](#installation-and-usage)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
 - [Demo](#demo)
 - [License](#license)
 
@@ -21,24 +31,38 @@ The Slippery Random Maze project simulates a grid-based maze environment where a
 - **Modular Design:** Components for environment, controller, drawer, and state.
 - **Extendable:** Easy to integrate with reinforcement learning algorithms.
 
-## Installation and Usage
+## Installation
 
-**Clone the repository and use docker:**
+**Clone the repository:**
 
 ```
 git clone https://github.com/dancher00/Slippery-Random-Maze.git
 cd Slippery-Random-Maze
-
-docker build --no-cache -t randommaze .
-docker run --rm -v $(pwd)/img:/app/img randommaze
 ```
 
 
-## Demo
+## Usage
 
-Below is a demonstration of the project in action:
+Use docker
 
-![Slippery Maze Demo](https://github.com/dancher00/Slippery-Random-Maze/blob/main/demo.gif)
+```
+docker build --no-cache -t randommaze .
+
+./run.sh q_learning
+./run.sh value_iteration
+./run.sh policy_iteration
+
+
+```
+## Results
+
+![PI_train](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/policy-iteration/training.png)
+
+![VI_train](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/value-iteration/training.png)
+
+![Q_train](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/q-learning/training.png)
+
+
 
 
 ## License
