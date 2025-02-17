@@ -46,6 +46,14 @@ docker build --no-cache -t randommaze .
 
 
 ```
+## Results
+
+![PI_train](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/policy-iteration/training.png)
+
+![VI_train](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/value-iteration/training.png)
+
+![Q_train](https://github.com/dancher00/Slippery-Random-Maze/blob/main/results/q-learning/training.png)
+
 
 ## Demo
 
