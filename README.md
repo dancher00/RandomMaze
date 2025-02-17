@@ -41,8 +41,10 @@ Use docker
 docker build --no-cache -t randommaze .
 
 
+docker run -it -v "$(pwd)/results":/app/results randommaze python main.py --method q_learning
+docker run -it -v "$(pwd)/results":/app/results randommaze python main.py --method value_iteration
+docker run -it -v "$(pwd)/results":/app/results randommaze python main.py --method policy_iteration
 
-docker run --rm -v $(pwd)/img:/app/img randommaze
 ```
 
 ## Demo
