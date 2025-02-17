@@ -1,1 +1,1 @@
-from .agent import MazeAgent, ValueIterationAgent
+from .agent import MazeAgent, ValueIterationAgent, PolicyIterationAgent

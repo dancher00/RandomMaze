@@ -1,6 +1,6 @@
 from tqdm import tqdm
 
-from agent import MazeAgent, ValueIterationAgent
+from agent import MazeAgent, ValueIterationAgent, PolicyIterationAgent
 
 
 class Trainer:
@@ -54,5 +54,16 @@ class ValueIterationTrainer:
                 self.agent.value_function[state] = self.agent.compute_action_value(state)
                 delta = max(delta, abs(v - self.agent.value_function[state]))
             # Stop criteria
+            self.agent.training_deltas.append(delta)
             if delta < self.agent.theta:
                 break
+
+
+class PolicyIterationTrainer:
+    def __init__(self, agent: PolicyIterationAgent):
+        self.agent = agent
+        self.env = agent.env
+
+    def train(self):
+        iterations = self.agent.policy_iteration()
+        print(f"Policy Iteration сошлась за {iterations} итераций.")

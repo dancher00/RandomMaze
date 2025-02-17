@@ -1,1 +1,1 @@
-from .trainer import Trainer, ValueIterationTrainer
+from .trainer import Trainer, ValueIterationTrainer, PolicyIterationTrainer
