@@ -1,6 +1,8 @@
 # Slippery Random Maze Reinforcement Learning Project
 
-This project is a minimal environment designed for experimenting with reinforcement learning algorithms. The environment is a grid-based maze where the agent experiences "slippery" dynamics: intended moves have an 85% chance of success and a 15% chance of moving to a random adjacent unblocked cell.
+This project is about training an agent to escape "slippery" labyrinths. 
+The environment is a grid-based maze where the agent experiences "slippery" dynamics: 
+intended moves have an 85% chance of success and a 15% chance of moving to a random adjacent unblocked cell.
 
 ## Table of Contents
 - [Overview](#overview)
@@ -25,7 +27,7 @@ for i in range(self.n):
             states.append((i,j))
 ```
 
-The agent receives a -1 reward for any action if it does not reach the goal cell as a result. Also it does not receive a penalty for colliding with walls. When the goal is reached, the agent receives a reward of 0:
+The agent receives a -1 reward for any action if it does not reach the goal cell as a result. The agent can't hit walls by design. When the goal is reached, the agent receives a reward of 0:
 
 ```python
 reward = 0 if self.state == self.goal else -1
