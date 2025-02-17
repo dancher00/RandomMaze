@@ -37,13 +37,6 @@ reward = 0 if self.state == self.goal else -1
 
 Three reinforcement learning algorithms are implemented in this environment: value iteration, policy iteration and q-learning. For first two approaches state transition function is used to calculate the probability of next state, for q-learning method next state is sampled from distribution described above.
 
-## Features
-
-- **Grid-based Maze:** Dynamic maze with random blocked cells.
-- **Stochastic Dynamics:** Moves have a chance to deviate from the intended direction.
-- **Visual Interface:** Rendered using Pygame.
-- **Modular Design:** Components for environment, controller, drawer, and state.
-- **Extendable:** Easy to integrate with reinforcement learning algorithms.
 
 ## Installation and Usage
 
