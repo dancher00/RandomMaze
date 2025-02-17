@@ -17,8 +17,25 @@ intended moves have an 85% chance of success and a 15% chance of moving to a ran
 
 The Slippery Random Maze project simulates a grid-based maze environment where an agent attempts to navigate from a starting position to a goal while encountering stochastic dynamics. The agent can move up, down, left, right, or stay in place. The movement action succeeds with an 85% probability if the target cell is not blocked; otherwise, the remaining 15% is equally distributed among other available adjacent cells.
 
-Python code for state transition:
 
+In case "Up" and other movements are valid moves:
+$$
+P((x_i, y_i + 1)\mid(x_i, y_i), \text{``Up''}) = 0.85
+$$
+
+$$
+P((x_i - 1, y_i)\mid(x_i, y_i), \text{``Up''}) = 0.05
+$$
+
+$$
+P((x_i, y_i - 1)\mid(x_i, y_i), \text{``Up''}) = 0.05
+$$
+
+$$
+P((x_i + 1, y_i)\mid(x_i, y_i), \text{``Up''}) = 0.05
+$$
+
+Python code for state transition:
 ```python
 intended_move = self.transitions[action]
 next_state = (state[0] + intended_move[0], state[1] + intended_move[1])
@@ -35,6 +52,13 @@ if not self._is_valid(next_state):
         reward = 0 if next_state == self.goal else -1
         transitions.append([1, next_state, reward, False])
         return transitions
+
+free_neighbors = self._get_free_neighbors(state)
+for free_state in free_neighbors:
+    reward = 0 if free_state == self.goal else -1
+    prob = 0.15 / len(free_neighbors) if free_state != next_state else 0.15 / len(free_neighbors) + 0.85
+    transitions.append([prob, free_state, reward, False])
+return transitions
 ```
 
 The agent receives a -1 reward for any action if it does not reach the goal cell as a result. The agent can't hit walls by design. When the goal is reached, the agent receives a reward of 0:
